@@ -45,6 +45,28 @@ You can easily save money by 3D printing keycaps and the potentiometer knob, and
 
 Firmware is in the qmk/taylorpad folder.
 
-The included keymap uses volume controls for the rotary encoder, numpad key 0 for rotary switch, and numpad keys 1 through 6 for the switches.
+The included default keymap uses volume controls for the rotary encoder, numpad key 0 for rotary switch, and numpad keys 1 through 6 for the switches.
 
-*TODO*: flashing instructions
+The `encoder_num` keymap changes the rotary encoder to use the 7 and 8 keys, and is included in case you have trouble remapping volume keycodes (reported to have issues on MacOS)
+
+The following instructions have only been tested on MacOS, and users on Windows or Linux systems may have to do a bit of tweaking along the way (mainly in the QMK toolbox section)
+
+1. Follow the QMK "getting started" guide to install QMK - https://beta.docs.qmk.fm/tutorial/newbs_getting_started - steps 1 through 3.
+2. Install QMK Toolbox
+
+3. Symlink the qmk/taylorpad folder in this repository to the `~/qmk_firmware/keyboards/handwired` directory.
+    - `git clone https://github.com/sbeck14/TaylorPad`
+    - `ln -s [git_directory]/TaylorPad/qmk/taylorpad ~/qmk_firmware/keyboards/handwired`
+4. Compile the firmware using the `qmk compile` command.
+    - `qmk compile -kb handwired/taylorpad -km default`
+    - This will place the `.hex` file in `~/qmk_firmware/.build/handwired_taylorpad_encoder_num.hex`
+5. Get a flashing tool. This guide will use QMK Toolbox
+    - Easiest (MacOS/Windows) - install QMK Toolbox https://github.com/qmk/qmk_toolbox/releases
+    - If you are using Linux, you will have to use https://beta.docs.qmk.fm/tutorial/newbs_flashing#flash-your-keyboard-from-the-command-line instead. You'll be on your own from here on out (for now)
+6. Open QMK Toolbox.
+7. Put the Arduino into DFU mode
+    - Bridge the GND and RST pins briefly with a bit of wire
+    - The Arduino should immediately be recognized by QMK Toolbox
+8. Open the hex file (`~/qmk_firmware/.build/handwired_taylorpad_encoder_num.hex`) with QMK Toolbox
+9. Click Flash
+10. Wait a few seconds, and you're done! Try it out!
